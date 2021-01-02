@@ -23,6 +23,7 @@
         "autoRun": false
     },
     "appTheme": {
+        "accentColor": "#4ebed7",
         "logoUrl": "https://github.com/Microsoft/pxt-sample",
         "homeUrl": "http://microsoft.github.io/pxt-sample/",
         "privacyUrl": "https://go.microsoft.com/fwlink/?LinkId=521839",
@@ -42,7 +43,7 @@
         "monacoToolbox": true,
         "invertedMenu": true,
         "showHomeScreen": true,
-        "homeScreenHero": "./static/hero.png",
+        "homeScreenHero": "./static/logo.jpg",
         "blocklyOptions": {
             "grid": {
                 "spacing": 45,
@@ -60,7 +61,7 @@
         "python": true,
         "greenScreen": true,
         "monacoColors": {
-            "editor.background": "#ecf0f1"
+            "editor.background": "#fcfcfc"
         }
     }
 }

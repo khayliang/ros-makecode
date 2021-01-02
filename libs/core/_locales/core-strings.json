@@ -24,6 +24,7 @@
   "Number|block": "Number",
   "Object|block": "Object",
   "ROS.connect|block": "connect to %url",
+  "ROS.move|block": "Move $type with speed: $speed for $duration seconds",
   "ROS.publish|block": "publish %message to %topic",
   "ROS.subscribe|block": "Subscribe to topic: $topic as type: $type",
   "ROS|block": "ROS",

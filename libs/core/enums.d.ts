@@ -11,3 +11,14 @@ declare const enum MessageTypes {
     Number = 2,
     Bool = 3,
 }
+
+declare const enum SpeedTypes {
+    Slow = 1,
+    Medium = 2,
+    Fast = 3
+}
+
+declare const enum MovementTypes {
+    Forward = 0,
+    Rotate = 1
+}

@@ -124,6 +124,8 @@
   "ROS": "ROS Functionalities",
   "ROS.connect": "Connect to ROSBridge",
   "ROS.connect|param|url": "the websocket URL to connect, eg:ws://localhost:9090",
+  "ROS.move": "Move robot",
+  "ROS.move|param|type": "@param speed",
   "ROS.publish": "Publish a message",
   "ROS.publish|param|topic": "@param message ",
   "ROS.subscribe": "Subscribe to a topic",

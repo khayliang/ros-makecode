@@ -18,26 +18,33 @@ namespace pxsim {
     }
 
     public connect(url: string) {
-      this.ros.on('connection', function() {
-        this.connected = true
-        logMsg('Connected to websocket server.')
+      return new Promise((resolve, reject) => {
+        this.ros.on('connection', function() {
+          this.connected = true
+          logMsg('Connected to websocket server.')
+          resolve()
+        })
+      
+        this.ros.on('error', function() {
+          this.connected = false
+          logMsg('Error connecting to websocket server: ')
+          reject(Error("ROS Failed to connect"))
+        })
+      
+        this.ros.on('close', function() {
+          this.connected = false
+          logMsg('Connection to websocket server closed.')
+          resolve()
+        })
+        if (!this.connected){
+          this.ros.connect(url)
+          this.bridgeUrl = url
+        }
       })
-    
-      this.ros.on('error', function() {
-        logMsg('Error connecting to websocket server: ')
-      })
-    
-      this.ros.on('close', function() {
-        logMsg('Connection to websocket server closed.')
-      })
-      if (!this.connected){
-        this.ros.connect(url)
-        this.bridgeUrl = url
-      }
-
     }
     public close(){
       this.ros.close()
+      this.connected = false
     }
     public publish(topic: string, message: Messages.RosMessage){
       const publisher = new ROSLIB.Topic({
@@ -45,7 +52,7 @@ namespace pxsim {
         name: topic,
         messageType: message.messageType
       })
-      console.log(JSON.stringify(message.data) + JSON.stringify(message.messageType))
+      //console.log(JSON.stringify(message.data) + JSON.stringify(message.messageType))
 
       const publishedMessage = new ROSLIB.Message(message.data)
 
@@ -77,7 +84,7 @@ namespace pxsim.ROS {
      */
     //% weight=85
     //% blockId=rosConnect block="connect to %url"
-  export function connect(url: string){
+  export async function connectAsync(url: string){
     const b = board()
     //TODO: Check if ros is already connected. If not, then connect
     b.ros.connect(url)
@@ -108,5 +115,39 @@ namespace pxsim.ROS {
       b.bus.queue(type, topic, stringifiedVal)
     })
     b.bus.listen(type, topic, handler)
+  }
+  
+  /**
+   * Move robot
+   * @param type
+   * @param speed
+   */
+  //% blockId=move block="Move $type with speed: $speed for $duration seconds"
+  export async function moveAsync(type: MovementTypes, speed: SpeedTypes, duration: number){
+    const b = board()
+    const maxForward = 0.5
+    const maxRotate = 2
+    const sleepDuration = 50
+
+    const speedMultiplier = speed.valueOf()/3
+
+    const repetitions = duration*1000/sleepDuration
+
+    function sleep() {
+      return new Promise(resolve => setTimeout(resolve, sleepDuration));
+    }
+    let msg = new Messages.Twist()
+    if (type === MovementTypes.Forward){
+      msg.data.linear.x = maxForward * speedMultiplier
+    }
+    else if(type === MovementTypes.Rotate){
+      msg.data.angular.z = maxRotate * speedMultiplier
+    }
+    for (let i = 0; i != repetitions; ++i){
+      b.ros.publish('/cmd_vel', msg)
+      await sleep()
+    }
+    b.ros.publish('/cmd_vel', new Messages.Twist())
+
   }
 }

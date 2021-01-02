@@ -116,7 +116,7 @@ declare namespace ROS {
      */
     //% weight=85
     //% blockId=rosConnect block="connect to %url"
-    //% shim=ROS::connect
+    //% shim=ROS::connectAsync promise
     function connect(url: string): void;
 
     /**
@@ -137,6 +137,15 @@ declare namespace ROS {
     //% blockId=subscribeMessage block="Subscribe to topic: $topic as type: $type"
     //% shim=ROS::subscribe
     function subscribe(topic: string, type: SubscribableTypes, handler: () => void): void;
+
+    /**
+     * Move robot
+     * @param type
+     * @param speed
+     */
+    //% blockId=move block="Move $type with speed: $speed for $duration seconds"
+    //% shim=ROS::moveAsync promise
+    function move(type: MovementTypes, speed: SpeedTypes, duration: number): void;
 
 }
 

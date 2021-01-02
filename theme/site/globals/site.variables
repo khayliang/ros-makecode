@@ -40,7 +40,7 @@
     Brand Colors
 --------------------*/
 
-@primaryColor        : @blue;
+@primaryColor        : @red;
 @secondaryColor      : @grey;
 
 @lightPrimaryColor   : @lightBlue;
@@ -54,7 +54,7 @@
    Menu
 --------------------*/
 
-@mainMenuBackground: @purple;
+@mainMenuBackground: @red;
 @mainMenuInvertedBackground: @mainMenuBackground;
 @mainMenuTutorialBackground: @orange;
 

@@ -64,8 +64,11 @@ namespace pxsim.Messages {
       }
     };
     readonly messageType: string = 'geometry_msgs/Twist';
-    constructor(){
+    constructor(data ?: TwistObj){
       super()
+      if (data){
+        this.data = data
+      }
     }
   }
 
