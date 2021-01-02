@@ -28,6 +28,17 @@ declare namespace console {
     function log(msg: string): void;
 
 }
+declare namespace keyboard {
+    /**
+     * key
+     * @param type
+     * @param speed
+     */
+    //% blockId=key block="on press of $key"
+    //% shim=keyboard::onPress
+    function onPress(key: KeyTypes, body: () => void): void;
+
+}
 declare namespace Messages {
     /**
      * A Typical ROS Message

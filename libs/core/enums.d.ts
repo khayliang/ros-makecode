@@ -22,3 +22,10 @@ declare const enum MovementTypes {
     Forward = 0,
     Rotate = 1
 }
+
+declare const enum KeyTypes {
+    ArrowLeft,
+    ArrowUp,
+    ArrowRight,
+    ArrowDown,
+}
