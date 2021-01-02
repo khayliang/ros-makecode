@@ -1,49 +1,4 @@
 // Auto-generated from simulator. Do not edit.
-declare namespace hare {
-    /**
-     * This is hop
-     */
-    //% blockId="sampleHop" block="hop %hop on color %color=colorNumberPicker"
-    //% hop.fieldEditor="gridpicker"
-    //% shim=hare::hop
-    function hop(hop: Hop, color: number): void;
-
-    //% blockId=sampleOnLand block="on land"
-    //% optionalVariableArgs
-    //% shim=hare::onLand
-    function onLand(handler: (height: number, more: number, most: number) => void): void;
-
-}
-declare namespace turtle {
-    /**
-     * Moves the sprite forward
-     * @param steps number of steps to move, eg: 1
-     */
-    //% weight=90
-    //% blockId=sampleForward block="forward %steps"
-    //% shim=turtle::forwardAsync promise
-    function forward(steps: number): void;
-
-    /**
-     * Moves the sprite forward
-     * @param direction the direction to turn, eg: Direction.Left
-     * @param angle degrees to turn, eg:90
-     */
-    //% weight=85
-    //% blockId=sampleTurn block="turn %direction|by %angle degrees"
-    //% angle.min=-180 angle.max=180
-    //% shim=turtle::turnAsync promise
-    function turn(direction: Direction, angle: number): void;
-
-    /**
-     * Triggers when the turtle bumps a wall
-     * @param handler 
-     */
-    //% blockId=onBump block="on bump"
-    //% shim=turtle::onBump
-    function onBump(handler: () => void): void;
-
-}
 declare namespace loops {
     /**
      * Repeats the code forever in the background. On each iteration, allows other code to run.
@@ -68,45 +23,120 @@ declare namespace console {
     /**
      * Print out message
      */
-    //%
+    //% block
     //% shim=console::log
     function log(msg: string): void;
 
 }
+declare namespace Messages {
     /**
-     * A ghost on the screen.
+     * A Typical ROS Message
      */
     //%
-    declare class Sprite {
+    class RosMessage {
         /**
-         * The X-coordiante
+         * Message Data
          */
         //%
-        //% shim=.x
-        public x: number;
+        //% shim=.data
+        public data: object;
 
         /**
-         * The Y-coordiante
+         * Message Type
          */
         //%
-        //% shim=.y
-        public y: number;
+        //% shim=.messageType
+        public messageType: string;
 
         /**
-         * Move the thing forward
+         * Get Data
          */
         //%
-        //% shim=.forwardAsync promise
-        public forward(steps: number): void;
+        //% shim=.getData
+        public getData(): object;
 
     }
-declare namespace sprites {
+    //% blockSetVariable=message
+    //% blockId="createmessage"
+    //% shim=Messages::createMessage
+    function createMessage(types: MessageTypes): Messages.RosMessage;
+
     /**
-     * Creates a new sprite
+     * Gets a response value
+     * @param type the message type
+     * @param topic the topic to get message from
      */
-    //% blockId="sampleCreate" block="createSprite"
-    //% shim=sprites::createSprite
-    function createSprite(): Sprite;
+    //% weight=85
+    //% blockId=getResponse block="response type: %msgType from topic: %topic"
+    //% shim=Messages::getResponse
+    function getResponse(msgType: SubscribableTypes, topic: string): string | number | boolean;
+
+    /**
+     * Creates a Twist Message
+     * @param speed the forward speed
+     * @param angle the angular speed
+     */
+    //% weight=85
+    //% blockId=twistMessage block="Movement - Forward speed %speed, Angular speed %angle"
+    //% shim=Messages::twistMessage
+    function twistMessage(speed: number, angle: number): Messages.RosMessage;
+
+    /**
+     * Creates a String Message
+     * @param string the string
+     */
+    //% weight=85
+    //% blockId=stringMessage block="String: %text"
+    //% shim=Messages::stringMessage
+    function stringMessage(text: string): Messages.RosMessage;
+
+    /**
+     * Creates a Number Message
+     * @param number the number
+     */
+    //% weight=85
+    //% blockId=numberMessage block="Number: %num"
+    //% shim=Messages::numberMessage
+    function numberMessage(num: number): Messages.RosMessage;
+
+    /**
+     * Creates a Boolean Message
+     * @param bool the boolean
+     */
+    //% weight=85
+    //% blockId=booleanMessage block="Bool: %bool"
+    //% shim=Messages::booleanMessage
+    function booleanMessage(bool: boolean): Messages.RosMessage;
+
+}
+declare namespace ROS {
+    /**
+     * Connect to ROSBridge
+     * @param url the websocket URL to connect, eg:ws://localhost:9090
+     */
+    //% weight=85
+    //% blockId=rosConnect block="connect to %url"
+    //% shim=ROS::connect
+    function connect(url: string): void;
+
+    /**
+     * Publish a message
+     * @param topic
+     * @param message 
+     */
+    //% blockId=publishMessage block="publish %message to %topic"
+    //% shim=ROS::publish
+    function publish(message: Messages.RosMessage, topic: string): void;
+
+    /**
+     * Subscribe to a topic
+     * @param topic
+     * @param response
+     * @param body 
+     */
+    //% blockId=subscribeMessage block="Subscribe to topic: $topic as type: $type"
+    //% shim=ROS::subscribe
+    function subscribe(topic: string, type: SubscribableTypes, handler: () => void): void;
 
 }
 

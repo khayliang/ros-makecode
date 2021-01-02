@@ -1,15 +1,16 @@
 {
-  "name": "pxt-sample",
-  "version": "2.0.2",
-  "description": "sample target for PXT",
+  "name": "ros-makecode",
+  "version": "0.0.1",
+  "description": "ROS MakeCode Editor",
   "keywords": [
     "JavaScript",
     "education",
-    "PXT"
+    "PXT",
+    "ROS"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Microsoft/pxt-sample.git"
+    "url": "git+https://github.com/khayliang/ros-makecode.git"
   },
   "author": "",
   "license": "MIT",
@@ -25,14 +26,16 @@
     "docs/**"
   ],
   "devDependencies": {
-    "typescript": "^3.7.5",
-    "semantic-ui-less": "2.2.14",
     "@types/bluebird": "2.0.33",
     "@types/jquery": "3.3.29",
     "@types/marked": "0.3.0",
-    "@types/node": "8.0.53"
+    "@types/node": "8.0.53",
+    "@types/roslib": "^1.1.1",
+    "semantic-ui-less": "2.2.14",
+    "typescript": "^3.7.5"
   },
   "dependencies": {
-    "pxt-core": "^6.0.1"
+    "pxt-core": "^6.0.1",
+    "roslib": "^1.1.0"
   }
 }

@@ -1,21 +1,13 @@
-declare const enum Direction {
-    //% block=left
-    Left,
-    //% block=right
-    Right
+declare const enum SubscribableTypes {
+    String = 1,
+    Number = 2,
+    Bool = 3,
 }
+  
 
-declare const enum Hop {
-    //% block=short
-    Short,
-    //% block=long
-    Long,
-    //% block=silly
-    Silly,
-    //% block=wow
-    Incredible,
-    //% block="to the moon!"
-    Astronomical
+declare const enum MessageTypes {
+    Twist = 0,
+    String = 1,
+    Number = 2,
+    Bool = 3,
 }
-
-

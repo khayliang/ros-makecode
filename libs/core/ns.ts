@@ -1,20 +1,15 @@
 /**
- * Basic functionalities.
+ * ROS Message functionalities.
  */
 //% color=#00BCD4 weight=100
-namespace turtle {
-
-}
-
-//% color=#D4BC00 weight=95
-namespace hare {
+namespace Messages {
 
 }
 
 /**
- * Control flow
+ * ROS Functionalities
  */
 //% color=#FF5722 weight=90
-namespace control {
+namespace ROS {
 
 }
